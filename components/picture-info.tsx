@@ -3,6 +3,8 @@ import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Image, I
 import { useEffect, useRef, useState } from "react";
 import { Message } from "./message";
 import type {ButtonProps} from '@nextui-org/button';
+import copy from "copy-to-clipboard";
+import { SERVER_URL } from "@/interface/api";
 
 const shareModeLabel = ['水印', '压缩', '原图']
 
@@ -27,8 +29,13 @@ export const PictureInfo = (props: PictureInfoProps) => {
         }
         setLoading(true)
         IOC.share.share([`p${props.id}`], Number(Array.from(shareMode)[0]), password)
-        .then(()=>{
+        .then(({data})=>{
+            Message.success('分享成功, 链接已复制到剪贴板')
+            copy(SERVER_URL + "/picture/share/" + data)
             setShareBtnState('success')
+            setTimeout(() => {
+                setShareBtnState('pending');
+            }, 1000);
         })
         .finally(()=>{
             setLoading(false);
@@ -63,7 +70,7 @@ export const PictureInfo = (props: PictureInfoProps) => {
             Message.success('更名成功');
         })
         .catch(()=>{
-            Message.success('更名失败');
+            Message.error('更名失败');
             setPictureName(fileName);
         })
     }
@@ -127,7 +134,7 @@ export const PictureInfo = (props: PictureInfoProps) => {
                                         分享密码
                                     </p>
                                     <div className="mt-2 flex flex-col gap-2 w-full">
-                                        <Input size="sm" value={password} onValueChange={setPassword} />
+                                        <Input size="sm" value={password} onValueChange={setPassword} type='password' />
                                         <Button color={
                                             shareButtonColor
                                         } onClick={share}>
