@@ -18,7 +18,6 @@ const CheckCode = (props: { type: 'email' | 'phone' | 'unknown', account: string
                     setCD(val.data.cd + 1);
                 })
                 .catch((err) => {
-                    console.log(err);
                     setCD(60 * 1000);
                 })
         }
@@ -26,7 +25,6 @@ const CheckCode = (props: { type: 'email' | 'phone' | 'unknown', account: string
             IOC.user.getCheckCodeByPhone(props.account)
                 .then((val) => {
                     setCD(val.data.cd + 1);
-                    console.log(val.data.cd)
                 })
                 .catch(() => {
                     setCD(60 * 1000);

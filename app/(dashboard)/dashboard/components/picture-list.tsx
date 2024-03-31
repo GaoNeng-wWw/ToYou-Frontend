@@ -12,11 +12,7 @@ export function PictureList(props: PictureListProps){
     const [canLoad,setCanLoad] = useState(false);
     const [finish,setFinish] = useState(false);
     const obEle = useRef(null);
-    useMount(()=>{
-        console.log('mount')
-    })
     useMemo(()=>{
-        console.log('id change')
         setCanLoad(false);
         IOC.picture.getList(id)
         .then(({data})=>{
@@ -30,7 +26,6 @@ export function PictureList(props: PictureListProps){
                     return [...data.records];
                 }
                 const oldIds = old.map((oldP) => oldP.id);
-                console.log([...old, ...data.records.filter((p)=>!oldIds.includes(p.id))]);
                 return [...old, ...data.records.filter((p)=>!oldIds.includes(p.id))];
             });
             setCanLoad(true)

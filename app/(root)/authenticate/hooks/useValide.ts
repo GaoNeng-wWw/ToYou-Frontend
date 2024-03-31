@@ -53,7 +53,6 @@ export const useValide = (
             return;
         }
         if (pageType === 'register'){
-            console.log(props.password, props.confirmPassword)
             const schemaRes = schema['register'].safeParse(props)
             setValide(schemaRes.success && (props.password === props.confirmPassword));
             if (!schemaRes.success){

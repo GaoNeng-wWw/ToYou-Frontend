@@ -21,7 +21,6 @@ export default function Files(){
     const [folderInfo, setFolderInfo] = useState<IFold[]>([])
     const [children, setChildren] = useState<string[]>([])
     useEffect(()=>{
-        Message.success('test')
         if (cache.has(id)){
             setChildren(cache.get(id)!);
             return;

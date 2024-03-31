@@ -19,8 +19,8 @@ http.interceptors.request.use(
         return config;
     },
     (err) => {
-        console.log(err);
-        throw new Error(err);
+        // console.log(err);
+        // throw new Error(err);
     }
 )
 http.interceptors.response.use((val) => {

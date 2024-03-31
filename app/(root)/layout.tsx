@@ -31,57 +31,72 @@ export default function RootLayout({children,}: {
     children: React.ReactNode;
 }) {
     return (
-        <main className="w-full h-full">
-            <Navbar/>
-            <section className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-                <ToastProvider>
-                    <Toaster toastOptions={{
-                        className: '',
-                        duration: 5000,
-                        style: {
-                            background: rgba(0, 0, 0, 0),
-                            color: rgba(0, 0, 0, 0),
-                            borderStyle: 'none',
-                            boxShadow: 'none'
-                        }
-                    }
-                    } gutter={-15}/>
-                    <AuthProvider whiteList={['/', '/authenticate', '/pricing']}>
-                        {children}
-                    </AuthProvider>
-                </ToastProvider>
-            </section>
-            <footer className="max-w-[900px] mx-auto px-6 py-3 w-full flex flex-col gap-2 text-sm">
-                <ul className="w-fit flex gap-2 mx-auto">
-                    <li>
-                        <Link href="#" size="sm">
-                            使用条款
-                        </Link>
-                    </li>
-                    <li>|</li>
-                    <li>
-                        <Link href="#" size="sm">
-                            用户协议
-                        </Link>
-                    </li>
-                    <li>|</li>
-                    <li>
-                        <Link href="/about" size="sm">
-                            关于我们
-                        </Link>
-                    </li>
-                </ul>
-                <div className="text-center">
-                    <Link href="https://beian.miit.gov.cn/" isExternal size="sm">
-                        鄂ICP备2023011709号-7
-                    </Link>
-                    <div className="mx-auto text-default-600 text-center">
-                            <span>
-                                Copyright &copy;2023 Vastsea, All rights reserved - ToYou Project
-                            </span>
-                    </div>
-                </div>
-            </footer>
-        </main>
+        <html lang="cn" suppressHydrationWarning>
+            <head>
+                <title>图邮 - ToYou</title>
+                <link rel="icon" href="/favicon.ico" sizes="any"/>
+            </head>
+            <body
+                className={clsx(
+                    "min-h-screen bg-background font-sans antialiased",
+                    fontSans.variable
+                )}
+            >
+                <Providers themeProps={{attribute: "class", defaultTheme: "dark"}}>
+                    <ToastProvider>
+                        <main className="w-full h-full">
+                            <Navbar/>
+                            <section className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+                                <Toaster toastOptions={{
+                                    className: '',
+                                    duration: 5000,
+                                    style: {
+                                        background: rgba(0, 0, 0, 0),
+                                        color: rgba(0, 0, 0, 0),
+                                        borderStyle: 'none',
+                                        boxShadow: 'none'
+                                    }
+                                }
+                                } gutter={-15}/>
+                                <AuthProvider whiteList={['/', '/authenticate', '/pricing']}>
+                                    {children}
+                                </AuthProvider>
+                            </section>
+                            <footer className="max-w-[900px] mx-auto px-6 py-3 w-full flex flex-col gap-2 text-sm">
+                                <ul className="w-fit flex gap-2 mx-auto">
+                                    <li>
+                                        <Link href="#" size="sm">
+                                            使用条款
+                                        </Link>
+                                    </li>
+                                    <li>|</li>
+                                    <li>
+                                        <Link href="#" size="sm">
+                                            用户协议
+                                        </Link>
+                                    </li>
+                                    <li>|</li>
+                                    <li>
+                                        <Link href="/about" size="sm">
+                                            关于我们
+                                        </Link>
+                                    </li>
+                                </ul>
+                                <div className="text-center">
+                                    <Link href="https://beian.miit.gov.cn/" isExternal size="sm">
+                                        鄂ICP备2023011709号-7
+                                    </Link>
+                                    <div className="mx-auto text-default-600 text-center">
+                                            <span>
+                                                Copyright &copy;2023 Vastsea, All rights reserved - ToYou Project
+                                            </span>
+                                    </div>
+                                </div>
+                            </footer>
+                        </main>
+                    </ToastProvider>
+                </Providers>
+            </body>
+        </html>
     );
 }

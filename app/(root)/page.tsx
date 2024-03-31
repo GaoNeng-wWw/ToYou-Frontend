@@ -12,6 +12,8 @@ import {FaLocationArrow} from "react-icons/fa6";
 import {BsLightbulb} from "react-icons/bs";
 import {IsLoggedIn} from "@/interface/hooks";
 import ClientOnly from "@/components/ClientOnly";
+import { useEffect } from "react";
+import { Message } from "@/components/message";
 
 export default function Home() {
     return (
